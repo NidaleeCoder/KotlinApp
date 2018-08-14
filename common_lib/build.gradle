@@ -1,0 +1,91 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+  compileSdkVersion rootProject.ext.android.compileSdkVersion
+  defaultConfig {
+    minSdkVersion rootProject.ext.android.minSdkVersion
+    targetSdkVersion rootProject.ext.android.targetSdkVersion
+    versionCode rootProject.ext.android.versionCode
+    versionName rootProject.ext.android.versionName
+    testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+    }
+  }
+}
+
+dependencies {
+  implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+  /**
+   * Kotlin
+   */
+  api rootProject.ext.dependencies.kotlin
+
+  /**
+   * Support
+   */
+  api(rootProject.ext.dependencies.appcompatV7)
+  api rootProject.ext.dependencies.design
+  api(rootProject.ext.dependencies.support_v4)
+  api rootProject.ext.dependencies.recycleview
+  api rootProject.ext.dependencies.cardview
+  api rootProject.ext.dependencies.constraintLayout
+  /**
+   * Dagger
+   */
+  api rootProject.ext.dependencies.dagger2
+  kapt rootProject.ext.dependencies.dagger2_compiler
+  /**
+   * OkHttp
+   */
+  api rootProject.ext.dependencies.okhttp3
+  api rootProject.ext.dependencies.okhttp3_log
+  /**
+   * Retrofit
+   */
+  api(rootProject.ext.dependencies.retrofit)
+  api(rootProject.ext.dependencies.retrofit_converter_gson)
+  api(rootProject.ext.dependencies.retrofit_adapter_rxjava2)
+  api(rootProject.ext.dependencies.retrofit_converter_scalars)
+  /**
+   * RxJava
+   */
+  api rootProject.ext.dependencies.rxjava2
+  api(rootProject.ext.dependencies.rxjava2_android)
+  /**
+   * Lifecycle
+   */
+  api rootProject.ext.dependencies.lifecycleRuntime
+  api rootProject.ext.dependencies.lifecycleExtensions
+  /**
+   * Anko
+   */
+  api rootProject.ext.dependencies.ankocommons
+  api rootProject.ext.dependencies.ankoappcompatv7
+  /**
+   * Glide
+   */
+  api(rootProject.ext.dependencies.glide) {
+    exclude group: "com.android.support"
+  }
+  kapt rootProject.ext.dependencies.glide_compiler
+  /**
+   * BaseAdapter
+   */
+  api rootProject.ext.dependencies.baseRecycleViewAdapter
+  /**
+   * AndroidUtilsCode
+   */
+  api rootProject.ext.dependencies.util_code
+
+  api rootProject.ext.dependencies.logger
+}
