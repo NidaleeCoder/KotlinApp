@@ -1,21 +1,6 @@
-package com.example.nidalee.usekotlin.net.bean
+package com.kotlin.nidalee.repository_lib.net.bean.android
 
-/**
- * description:
- * @author 奈德丽
- * @date 2018/8/1 20:03
- */
-data class HomeArticleBean(
-  val curPage: Int,
-  val datas: List<HomeArticleListBean>?,
-  val offset: Int,
-  val over: Boolean,
-  val pageCount: Int,
-  val size: Int,
-  val total: Int
-)
-
-data class HomeArticleListBean(
+data class Data(
   val apkLink: String,
   val author: String,
   val chapterId: Int,
