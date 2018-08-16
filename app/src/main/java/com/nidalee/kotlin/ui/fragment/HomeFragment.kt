@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_home.home_recycler_view
 /**
  * description:
  * @author 奈德丽
- * @date 2018/8/15 10:51
  */
 class HomeFragment :BaseFragment(){
 

@@ -25,4 +25,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':repository_lib')
     implementation project(":common_lib")
+    implementation 'com.just.agentweb:agentweb:4.0.2' // (必选)
 }

@@ -10,7 +10,6 @@ import com.nidalee.kotlin.R
 /**
  * description:
  * @author 奈德丽
- * @date 2018/8/15 11:04
  */
 class HomeAdapter(data: MutableList<HomeArticleListBean>?) :
   BaseQuickAdapter<HomeArticleListBean, BaseViewHolder>(R.layout.item_home_article,data) {
