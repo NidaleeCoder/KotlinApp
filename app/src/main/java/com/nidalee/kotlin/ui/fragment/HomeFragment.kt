@@ -6,6 +6,7 @@ import com.example.nidalee.usekotlin.net.bean.HomeArticleBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.HomeBannerBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseFragment
+import com.nidalee.kotlin.ui.activity.WebActivity
 import com.nidalee.kotlin.ui.adapter.HomeAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import com.orhanobut.logger.Logger
@@ -15,21 +16,21 @@ import kotlinx.android.synthetic.main.fragment_home.home_recycler_view
  * description:
  * @author 奈德丽
  */
-class HomeFragment :BaseFragment(){
+class HomeFragment : BaseFragment() {
 
   override fun initLayout(): Int {
     return R.layout.fragment_home
   }
 
-  private val linearLayoutManager:LinearLayoutManager by lazy {
+  private val linearLayoutManager: LinearLayoutManager by lazy {
     LinearLayoutManager(activity)
   }
 
-  private val homeAdapter:HomeAdapter by lazy {
+  private val homeAdapter: HomeAdapter by lazy {
     HomeAdapter(null)
   }
 
-  private val homeViewModel:HomeViewModel by lazy {
+  private val homeViewModel: HomeViewModel by lazy {
     HomeViewModel()
   }
 
@@ -38,6 +39,12 @@ class HomeFragment :BaseFragment(){
     home_recycler_view.run {
       layoutManager = linearLayoutManager
       adapter = homeAdapter
+    }
+    homeAdapter.setOnItemClickListener { adapter, view, position ->
+      WebActivity.startActivity(
+        context!!,
+        homeAdapter.data[position].link
+      )
     }
   }
 
@@ -48,19 +55,21 @@ class HomeFragment :BaseFragment(){
     homeViewModel.getHomeArticleList(1)
   }
 
-  private fun observerRequestData(){
+  private fun observerRequestData() {
 
-    homeViewModel?.bannerLiveData?.observe(this, object : UIBaseLiveData<MutableList<HomeBannerBean>>() {
-      override fun onSuccess(t: MutableList<HomeBannerBean>?) {
-        Logger.d(t)
-      }
+    homeViewModel?.bannerLiveData?.observe(
+      this,
+      object : UIBaseLiveData<MutableList<HomeBannerBean>>() {
+        override fun onSuccess(t: MutableList<HomeBannerBean>?) {
+          Logger.d(t)
+        }
 
-      override fun onError(errorMsg: String?) {
-        Logger.d(errorMsg)
-      }
-    })
+        override fun onError(errorMsg: String?) {
+          Logger.d(errorMsg)
+        }
+      })
 
-    homeViewModel?.articleLiveData?.observe(this,object : UIBaseLiveData<HomeArticleBean>(){
+    homeViewModel?.articleLiveData?.observe(this, object : UIBaseLiveData<HomeArticleBean>() {
       override fun onSuccess(t: HomeArticleBean?) {
         homeAdapter.setNewData(t?.datas)
       }
@@ -70,5 +79,4 @@ class HomeFragment :BaseFragment(){
       }
     })
   }
-
 }
