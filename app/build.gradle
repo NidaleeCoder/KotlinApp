@@ -26,4 +26,5 @@ dependencies {
     implementation project(':repository_lib')
     implementation project(":common_lib")
     implementation 'com.just.agentweb:agentweb:4.0.2' // (必选)
+    implementation 'cn.bingoogolapple:bga-banner:2.2.4@aar'
 }

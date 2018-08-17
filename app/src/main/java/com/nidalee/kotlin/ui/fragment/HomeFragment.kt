@@ -8,8 +8,11 @@ import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseFragment
 import com.nidalee.kotlin.ui.activity.WebActivity
 import com.nidalee.kotlin.ui.adapter.HomeAdapter
+import com.nidalee.kotlin.utils.BannerLoader
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import com.orhanobut.logger.Logger
+import com.youth.banner.BannerConfig
+import kotlinx.android.synthetic.main.fragment_home.home_banner
 import kotlinx.android.synthetic.main.fragment_home.home_recycler_view
 
 /**
@@ -57,11 +60,25 @@ class HomeFragment : BaseFragment() {
 
   private fun observerRequestData() {
 
-    homeViewModel?.bannerLiveData?.observe(
+    homeViewModel.bannerLiveData.observe(
       this,
       object : UIBaseLiveData<MutableList<HomeBannerBean>>() {
         override fun onSuccess(t: MutableList<HomeBannerBean>?) {
-          Logger.d(t)
+          val urlList = arrayListOf<String>()
+          t?.apply {
+            for(bean in t){
+              urlList.add(bean.imagePath)
+            }
+          }
+          home_banner.setImageLoader(BannerLoader())
+          home_banner.setImages(urlList)
+          home_banner.isAutoPlay(true)
+          home_banner.setDelayTime(5000)
+          home_banner.setIndicatorGravity(BannerConfig.CENTER)
+          home_banner.setOnBannerListener {
+            WebActivity.startActivity(context!!, t!![it].url)
+          }
+          home_banner.start()
         }
 
         override fun onError(errorMsg: String?) {
@@ -69,7 +86,7 @@ class HomeFragment : BaseFragment() {
         }
       })
 
-    homeViewModel?.articleLiveData?.observe(this, object : UIBaseLiveData<HomeArticleBean>() {
+    homeViewModel.articleLiveData.observe(this, object : UIBaseLiveData<HomeArticleBean>() {
       override fun onSuccess(t: HomeArticleBean?) {
         homeAdapter.setNewData(t?.datas)
       }

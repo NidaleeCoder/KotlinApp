@@ -88,4 +88,6 @@ dependencies {
   api rootProject.ext.dependencies.util_code
 
   api rootProject.ext.dependencies.logger
+
+  api rootProject.ext.dependencies.banner
 }

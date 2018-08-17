@@ -55,7 +55,10 @@ ext {
       baseRecycleViewAdapter = "2.9.40",
 
       //logger
-      loggerVersion = "2.2.0"
+      loggerVersion = "2.2.0",
+
+      //bgaBanner
+      bannerVersion = "1.4.10",
   ]
 
   dependencies = [
@@ -119,7 +122,9 @@ ext {
       baseRecycleViewAdapter: "com.github.CymChad:BaseRecyclerViewAdapterHelper:$rootProject.baseRecycleViewAdapter",
 
       //logger
-      logger:"com.orhanobut:logger:$rootProject.loggerVersion"
+      logger:"com.orhanobut:logger:$rootProject.loggerVersion",
+
+      banner: "com.youth.banner:banner:$rootProject.bannerVersion",
   ]
 }
 
