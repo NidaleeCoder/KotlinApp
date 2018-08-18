@@ -1,6 +1,5 @@
 package com.nidalee.kotlin.ui.fragment
 
-import android.view.View
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseFragment
 import com.orhanobut.logger.Logger
@@ -10,7 +9,7 @@ import org.jetbrains.anko.support.v4.toast
  * description:
  * @author 奈德丽
  */
-class NewsFragment : BaseFragment() {
+class NewsFragment : BaseFragment(){
   override fun initLayout(): Int {
     return R.layout.fragment_news
   }
@@ -23,7 +22,9 @@ class NewsFragment : BaseFragment() {
 
     val list = arrayListOf(4,5,6)
     toast("sss${list.translate { "sb$it" }}")
+
   }
+
 
   /**
    * 声明一个高阶函数
