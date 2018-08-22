@@ -7,13 +7,14 @@
 
   <ImageView
       android:id="@+id/article_item_img"
-      android:layout_width="130dp"
+      android:layout_width="100dp"
       android:layout_height="80dp"
       app:layout_constraintTop_toTopOf="parent"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       android:layout_marginLeft="6dp"
       android:background="#cfc"
+      android:scaleType="centerCrop"
       />
 
   <TextView

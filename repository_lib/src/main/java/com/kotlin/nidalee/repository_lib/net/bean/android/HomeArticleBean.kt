@@ -7,7 +7,7 @@ package com.example.nidalee.usekotlin.net.bean
  */
 data class HomeArticleBean(
   val curPage: Int,
-  val datas: List<HomeArticleListBean>?,
+  val datas: MutableList<HomeArticleListBean>,
   val offset: Int,
   val over: Boolean,
   val pageCount: Int,

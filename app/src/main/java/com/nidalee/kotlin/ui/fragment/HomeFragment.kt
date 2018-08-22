@@ -1,11 +1,15 @@
 package com.nidalee.kotlin.ui.fragment
 
 import android.support.v7.widget.LinearLayoutManager
+import android.view.View
+import android.view.View.OnClickListener
 import com.example.nidalee.usekotlin.net.UIBaseLiveData
 import com.example.nidalee.usekotlin.net.bean.HomeArticleBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.HomeBannerBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseFragment
+import com.nidalee.kotlin.ui.activity.KnowledgeActivity
+import com.nidalee.kotlin.ui.activity.ProjectActivity
 import com.nidalee.kotlin.ui.activity.WebActivity
 import com.nidalee.kotlin.ui.adapter.HomeAdapter
 import com.nidalee.kotlin.utils.BannerLoader
@@ -13,13 +17,28 @@ import com.nidalee.kotlin.viewmodel.HomeViewModel
 import com.orhanobut.logger.Logger
 import com.youth.banner.BannerConfig
 import kotlinx.android.synthetic.main.fragment_home.home_banner
+import kotlinx.android.synthetic.main.fragment_home.home_knowledge_rl
+import kotlinx.android.synthetic.main.fragment_home.home_project_rl
 import kotlinx.android.synthetic.main.fragment_home.home_recycler_view
+import kotlinx.android.synthetic.main.fragment_home.home_swipe_layout
+import org.jetbrains.anko.support.v4.startActivity
 
 /**
  * description:
  * @author 奈德丽
  */
-class HomeFragment : BaseFragment() {
+class HomeFragment : BaseFragment(),OnClickListener {
+
+  override fun onClick(v: View?) {
+    when(v?.id){
+      R.id.home_knowledge_rl->{
+        startActivity<KnowledgeActivity>()
+      }
+      R.id.home_project_rl->{
+        startActivity<ProjectActivity>()
+      }
+    }
+  }
 
   override fun initLayout(): Int {
     return R.layout.fragment_home
@@ -43,19 +62,34 @@ class HomeFragment : BaseFragment() {
       layoutManager = linearLayoutManager
       adapter = homeAdapter
     }
-    homeAdapter.setOnItemClickListener { adapter, view, position ->
+    home_knowledge_rl.setOnClickListener(this)
+    home_project_rl.setOnClickListener(this)
+    homeAdapter.setOnItemClickListener { _, _, position ->
       WebActivity.startActivity(
         context!!,
-        homeAdapter.data[position].link
+        homeAdapter.data[position].link,
+        homeAdapter.data[position].title
       )
     }
+    homeAdapter.setOnLoadMoreListener({getListData()},home_recycler_view)
+
+    home_swipe_layout.setOnRefreshListener {
+      mCurrentPage = 0
+      getListData()
+    }
   }
+
+  private var mCurrentPage = 0
 
   override fun initData() {
     super.initData()
     observerRequestData()
     homeViewModel.getHomeBanner()
-    homeViewModel.getHomeArticleList(1)
+    getListData()
+  }
+
+  private fun getListData(){
+    homeViewModel.getHomeArticleList(mCurrentPage)
   }
 
   private fun observerRequestData() {
@@ -76,7 +110,7 @@ class HomeFragment : BaseFragment() {
           home_banner.setDelayTime(5000)
           home_banner.setIndicatorGravity(BannerConfig.CENTER)
           home_banner.setOnBannerListener {
-            WebActivity.startActivity(context!!, t!![it].url)
+            WebActivity.startActivity(context!!, t!![it].url,t!![it].title)
           }
           home_banner.start()
         }
@@ -88,7 +122,21 @@ class HomeFragment : BaseFragment() {
 
     homeViewModel.articleLiveData.observe(this, object : UIBaseLiveData<HomeArticleBean>() {
       override fun onSuccess(t: HomeArticleBean?) {
-        homeAdapter.setNewData(t?.datas)
+        t?.apply {
+          if(mCurrentPage == 0){
+            homeAdapter.setNewData(t.datas)
+          }else{
+            homeAdapter.addData(t.datas)
+          }
+
+//          if(mCurrentPage < t.pageCount){
+//            mCurrentPage++
+//            homeAdapter.loadMoreComplete()
+//          }else{
+            homeAdapter.loadMoreEnd()
+//          }
+
+        }
       }
 
       override fun onError(errorMsg: String?) {

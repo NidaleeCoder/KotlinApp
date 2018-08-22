@@ -11,6 +11,7 @@
       android:gravity="center"
       android:singleLine="true"
       android:ellipsize="end"
+      android:text="11"
       />
 
 </android.support.constraint.ConstraintLayout>

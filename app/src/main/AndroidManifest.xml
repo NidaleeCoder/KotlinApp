@@ -32,6 +32,10 @@
     <activity android:name=".ui.activity.KnowledgeListActivity"/>
 
     <activity android:name=".ui.activity.WebActivity"/>
+
+    <activity android:name=".ui.activity.KnowledgeActivity"/>
+
+    <activity android:name=".ui.activity.ProjectActivity"/>
   </application>
 
 </manifest>

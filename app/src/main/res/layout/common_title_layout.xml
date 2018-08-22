@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="50dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/colorPrimary"
+    android:background="@color/colorAccent"
     >
 
-  <ImageView
+  <android.support.v7.widget.AppCompatImageView
       android:id="@+id/common_back"
       android:layout_width="25dp"
       android:layout_height="25dp"
@@ -15,7 +15,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       android:layout_marginLeft="16dp"
-      android:src="@mipmap/ic_launcher"/>
+      android:src="@drawable/ic_arrow_back_black_24dp"/>
 
   <TextView
       android:id="@+id/common_title"
@@ -25,7 +25,11 @@
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintLeft_toLeftOf="parent"
       app:layout_constraintRight_toRightOf="parent"
+      android:maxWidth="280dp"
+      android:singleLine="true"
+      android:ellipsize="end"
       android:textColor="#ffffff"
+      android:textSize="16sp"
       />
 
 </android.support.constraint.ConstraintLayout>

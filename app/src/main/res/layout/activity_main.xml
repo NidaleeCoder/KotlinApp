@@ -23,7 +23,7 @@
       app:layout_constraintBottom_toBottomOf="parent"
       android:layout_alignParentBottom="true"
       android:layout_gravity="bottom"
-      android:background="#cfc"
+      android:background="#ffffff"
       app:elevation="16dp"
       app:itemIconTint="@drawable/nav_item_color_state"
       app:itemTextColor="@drawable/nav_item_color_state"

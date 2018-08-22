@@ -10,6 +10,7 @@ import com.nidalee.kotlin.base.BaseActivity
 import com.nidalee.kotlin.ui.adapter.KnowledgeListAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_knowledge_list.knowledge_list_recycler_view
+import kotlinx.android.synthetic.main.activity_knowledge_list.knowledge_swipe_layout
 import kotlinx.android.synthetic.main.common_title_layout.common_title
 
 /**
@@ -21,6 +22,8 @@ class KnowledgeListActivity : BaseActivity() {
   override fun initLayout(): Int {
     return R.layout.activity_knowledge_list
   }
+
+  private var mCurrentPage = 0
 
   private var mCid = 0
   private var mTitle = ""
@@ -48,13 +51,24 @@ class KnowledgeListActivity : BaseActivity() {
     mCid = intent.getIntExtra("cid", 0)
     mTitle = intent.getStringExtra("title")
     common_title.text = mTitle
+
+    knowledge_swipe_layout.setOnRefreshListener {
+      mCurrentPage = 0
+      getListData()
+    }
+
     knowledge_list_recycler_view.run {
       layoutManager = LinearLayoutManager(this@KnowledgeListActivity)
       adapter = knowledgeAdapter
     }
-    knowledgeAdapter.setOnItemClickListener { adapter, view, position ->
-      WebActivity.startActivity(baseContext,knowledgeAdapter.data[position].link)
+    knowledgeAdapter.setOnItemClickListener { _, _, position ->
+      WebActivity.startActivity(
+        baseContext,
+        knowledgeAdapter.data[position].link,
+        knowledgeAdapter.data[position].title
+      )
     }
+    knowledgeAdapter.setOnLoadMoreListener({ getListData() }, knowledge_list_recycler_view)
   }
 
   override fun initData() {
@@ -62,9 +76,27 @@ class KnowledgeListActivity : BaseActivity() {
     viewModel.knowledgeTreeListLiveData.observe(this,
       object : UIBaseLiveData<KnowledgeArticleBean>() {
         override fun onSuccess(t: KnowledgeArticleBean?) {
-          knowledgeAdapter.setNewData(t?.datas)
+          t?.apply {
+            if (mCurrentPage == 0) {
+              knowledge_swipe_layout.isRefreshing = false
+              knowledgeAdapter.setNewData(t.datas)
+            } else {
+              knowledgeAdapter.addData(t.datas)
+            }
+
+            if (mCurrentPage < t.pageCount) {
+              mCurrentPage++
+              knowledgeAdapter.loadMoreComplete()
+            } else {
+              knowledgeAdapter.loadMoreEnd()
+            }
+          }
         }
       })
+    getListData()
+  }
+
+  private fun getListData() {
     viewModel.getKnowledgeTreeList(0, mCid)
   }
 }

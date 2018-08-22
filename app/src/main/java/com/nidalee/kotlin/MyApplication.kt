@@ -8,4 +8,5 @@ import com.nidalee.kotlin.base.BaseApplication
  * @date 2018/8/14 21:15
  */
 class MyApplication:BaseApplication() {
+
 }

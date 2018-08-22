@@ -11,7 +11,7 @@ import com.nidalee.kotlin.R
  * description:
  * @author 奈德丽
  */
-class HomeAdapter(data: MutableList<HomeArticleListBean>?) :
+class HomeAdapter(data: List<HomeArticleListBean>?) :
   BaseQuickAdapter<HomeArticleListBean, BaseViewHolder>(R.layout.item_home_article,data) {
   override fun convert(helper: BaseViewHolder?, item: HomeArticleListBean?) {
     Glide.with(mContext).load(item!!.envelopePic).into(helper!!.getView(R.id.article_item_img))
