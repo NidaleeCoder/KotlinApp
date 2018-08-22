@@ -10,6 +10,7 @@ import com.nidalee.kotlin.ui.adapter.KnowledgeTreeParentAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_knowledge.search_recycler_view_child
 import kotlinx.android.synthetic.main.activity_knowledge.search_recycler_view_parent
+import kotlinx.android.synthetic.main.common_title_layout.common_back
 import kotlinx.android.synthetic.main.common_title_layout.common_title
 
 /**
@@ -37,6 +38,7 @@ class KnowledgeActivity : BaseActivity() {
     super.initView()
 
     common_title.text = "知识体系"
+    common_back.setOnClickListener { finish() }
 
     search_recycler_view_parent.run {
       adapter = knowledgeTreeParentAdapter

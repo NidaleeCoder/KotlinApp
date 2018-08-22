@@ -36,6 +36,8 @@
     <activity android:name=".ui.activity.KnowledgeActivity"/>
 
     <activity android:name=".ui.activity.ProjectActivity"/>
+
+    <activity android:name=".ui.activity.NavigationActivity"/>
   </application>
 
 </manifest>

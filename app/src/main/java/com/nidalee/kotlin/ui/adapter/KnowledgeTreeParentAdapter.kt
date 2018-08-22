@@ -26,9 +26,11 @@ class KnowledgeTreeParentAdapter(list: MutableList<KnowledgeTreeBean>?) :
       val mTv = getView<TextView>(R.id.item_knowledge_tree_parent_tv)
       mTv.text = item?.name
       if (helper.adapterPosition == mCurPosition) {
-        mTv.setBackgroundColor(Color.parseColor("#bfc2bf"))
-      }else{
         mTv.setBackgroundColor(Color.parseColor("#ffffff"))
+        mTv.setTextColor(mContext.resources.getColor(R.color.colorAccent))
+      }else{
+        mTv.setBackgroundColor(Color.parseColor("#f4f7f4"))
+        mTv.setTextColor(Color.parseColor("#999999"))
       }
     }
   }

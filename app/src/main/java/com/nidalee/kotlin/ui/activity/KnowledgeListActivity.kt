@@ -11,6 +11,7 @@ import com.nidalee.kotlin.ui.adapter.KnowledgeListAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_knowledge_list.knowledge_list_recycler_view
 import kotlinx.android.synthetic.main.activity_knowledge_list.knowledge_swipe_layout
+import kotlinx.android.synthetic.main.common_title_layout.common_back
 import kotlinx.android.synthetic.main.common_title_layout.common_title
 
 /**
@@ -52,6 +53,10 @@ class KnowledgeListActivity : BaseActivity() {
     mTitle = intent.getStringExtra("title")
     common_title.text = mTitle
 
+    common_back.setOnClickListener {
+      finish()
+    }
+
     knowledge_swipe_layout.setOnRefreshListener {
       mCurrentPage = 0
       getListData()
@@ -84,7 +89,7 @@ class KnowledgeListActivity : BaseActivity() {
               knowledgeAdapter.addData(t.datas)
             }
 
-            if (mCurrentPage < t.pageCount) {
+            if (t.curPage < t.pageCount) {
               mCurrentPage++
               knowledgeAdapter.loadMoreComplete()
             } else {

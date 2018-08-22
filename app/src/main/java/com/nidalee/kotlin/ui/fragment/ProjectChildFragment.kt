@@ -69,7 +69,7 @@ class ProjectChildFragment : BaseFragment() {
           } else {
             childAdapter.addData(t.datas)
           }
-          if(mCurrentPage < t.pageCount){
+          if(t.curPage < t.pageCount){
             mCurrentPage++
             childAdapter.loadMoreComplete()
           }else{

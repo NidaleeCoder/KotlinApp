@@ -7,6 +7,7 @@ import com.nidalee.kotlin.base.BaseActivity
 import android.widget.LinearLayout
 import com.just.agentweb.AgentWeb
 import kotlinx.android.synthetic.main.activity_web.content_view
+import kotlinx.android.synthetic.main.common_title_layout.common_back
 import kotlinx.android.synthetic.main.common_title_layout.common_title
 import org.jetbrains.anko.startActivity
 
@@ -28,6 +29,7 @@ class WebActivity: BaseActivity() {
   override fun initView() {
     super.initView()
     common_title.text = intent.getStringExtra("title")
+    common_back.setOnClickListener{finish()}
     mUrl = intent.getStringExtra("url")
     AgentWeb.with(this)
       .setAgentWebParent(content_view, LinearLayout.LayoutParams(-1, -1))

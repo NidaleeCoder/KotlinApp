@@ -9,6 +9,7 @@ import com.kotlin.nidalee.repository_lib.net.bean.android.HomeBannerBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseFragment
 import com.nidalee.kotlin.ui.activity.KnowledgeActivity
+import com.nidalee.kotlin.ui.activity.NavigationActivity
 import com.nidalee.kotlin.ui.activity.ProjectActivity
 import com.nidalee.kotlin.ui.activity.WebActivity
 import com.nidalee.kotlin.ui.adapter.HomeAdapter
@@ -18,6 +19,7 @@ import com.orhanobut.logger.Logger
 import com.youth.banner.BannerConfig
 import kotlinx.android.synthetic.main.fragment_home.home_banner
 import kotlinx.android.synthetic.main.fragment_home.home_knowledge_rl
+import kotlinx.android.synthetic.main.fragment_home.home_navigation_rl
 import kotlinx.android.synthetic.main.fragment_home.home_project_rl
 import kotlinx.android.synthetic.main.fragment_home.home_recycler_view
 import kotlinx.android.synthetic.main.fragment_home.home_swipe_layout
@@ -27,15 +29,18 @@ import org.jetbrains.anko.support.v4.startActivity
  * description:
  * @author 奈德丽
  */
-class HomeFragment : BaseFragment(),OnClickListener {
+class HomeFragment : BaseFragment(), OnClickListener {
 
   override fun onClick(v: View?) {
-    when(v?.id){
-      R.id.home_knowledge_rl->{
+    when (v?.id) {
+      R.id.home_knowledge_rl -> {
         startActivity<KnowledgeActivity>()
       }
-      R.id.home_project_rl->{
+      R.id.home_project_rl -> {
         startActivity<ProjectActivity>()
+      }
+      R.id.home_navigation_rl -> {
+        startActivity<NavigationActivity>()
       }
     }
   }
@@ -64,6 +69,8 @@ class HomeFragment : BaseFragment(),OnClickListener {
     }
     home_knowledge_rl.setOnClickListener(this)
     home_project_rl.setOnClickListener(this)
+    home_navigation_rl.setOnClickListener(this)
+
     homeAdapter.setOnItemClickListener { _, _, position ->
       WebActivity.startActivity(
         context!!,
@@ -71,7 +78,7 @@ class HomeFragment : BaseFragment(),OnClickListener {
         homeAdapter.data[position].title
       )
     }
-    homeAdapter.setOnLoadMoreListener({getListData()},home_recycler_view)
+    homeAdapter.setOnLoadMoreListener({ getListData() }, home_recycler_view)
 
     home_swipe_layout.setOnRefreshListener {
       mCurrentPage = 0
@@ -88,7 +95,7 @@ class HomeFragment : BaseFragment(),OnClickListener {
     getListData()
   }
 
-  private fun getListData(){
+  private fun getListData() {
     homeViewModel.getHomeArticleList(mCurrentPage)
   }
 
@@ -100,7 +107,7 @@ class HomeFragment : BaseFragment(),OnClickListener {
         override fun onSuccess(t: MutableList<HomeBannerBean>?) {
           val urlList = arrayListOf<String>()
           t?.apply {
-            for(bean in t){
+            for (bean in t) {
               urlList.add(bean.imagePath)
             }
           }
@@ -110,7 +117,7 @@ class HomeFragment : BaseFragment(),OnClickListener {
           home_banner.setDelayTime(5000)
           home_banner.setIndicatorGravity(BannerConfig.CENTER)
           home_banner.setOnBannerListener {
-            WebActivity.startActivity(context!!, t!![it].url,t!![it].title)
+            WebActivity.startActivity(context!!, t!![it].url, t!![it].title)
           }
           home_banner.start()
         }
@@ -123,18 +130,18 @@ class HomeFragment : BaseFragment(),OnClickListener {
     homeViewModel.articleLiveData.observe(this, object : UIBaseLiveData<HomeArticleBean>() {
       override fun onSuccess(t: HomeArticleBean?) {
         t?.apply {
-          if(mCurrentPage == 0){
+          if (mCurrentPage == 0) {
             homeAdapter.setNewData(t.datas)
-          }else{
+          } else {
             homeAdapter.addData(t.datas)
           }
 
-//          if(mCurrentPage < t.pageCount){
-//            mCurrentPage++
-//            homeAdapter.loadMoreComplete()
-//          }else{
-            homeAdapter.loadMoreEnd()
-//          }
+          //          if(mCurrentPage < t.pageCount){
+          //            mCurrentPage++
+          //            homeAdapter.loadMoreComplete()
+          //          }else{
+          homeAdapter.loadMoreEnd()
+          //          }
 
         }
       }
