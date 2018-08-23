@@ -9,6 +9,7 @@ import com.kotlin.nidalee.repository_lib.net.bean.android.NavigationBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.ProjectTreeBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.ProjectTreeListBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.WebSitesBean
+import com.kotlin.nidalee.repository_lib.net.bean.eye.CategoryBean
 import com.kotlin.nidalee.repository_lib.repository.HomeRepository
 import io.reactivex.Observable
 
@@ -17,6 +18,7 @@ import io.reactivex.Observable
  * @author 奈德丽
  */
 class HomeModel {
+
 
   fun getHomeBanner(): Observable<MutableList<HomeBannerBean>> {
     return HomeRepository.getHomeBanner()

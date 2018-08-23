@@ -1,4 +1,4 @@
-package com.nidalee.kotlin.ui.activity
+package com.nidalee.kotlin.ui.activity.android
 
 import android.support.v4.app.FragmentTransaction
 import com.nidalee.kotlin.R
@@ -6,14 +6,14 @@ import com.nidalee.kotlin.base.BaseActivity
 import com.nidalee.kotlin.ui.fragment.HomeFragment
 import com.nidalee.kotlin.ui.fragment.NewsFragment
 import com.nidalee.kotlin.ui.fragment.ProjectFragment
-import com.nidalee.kotlin.ui.fragment.SearchFragment
+import com.nidalee.kotlin.ui.fragment.EyeFragment
 import kotlinx.android.synthetic.main.activity_main.bottom_navigation
 
 class MainActivity : BaseActivity() {
 
   //Fragment
   private var homeFragment: HomeFragment? = null
-  private var searchFragment: SearchFragment? = null
+  private var searchFragment: EyeFragment? = null
   private var newsFragment: NewsFragment? = null
   private var projectFragment: ProjectFragment? = null
 
@@ -69,7 +69,7 @@ class MainActivity : BaseActivity() {
       }
       1->{
         if (searchFragment == null) {
-          searchFragment = SearchFragment()
+          searchFragment = EyeFragment()
           searchFragment?.let { transaction.add(R.id.home_content_fl, it) }
         } else {
           searchFragment?.let { transaction.show(it) }

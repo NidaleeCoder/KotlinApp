@@ -1,7 +1,6 @@
-package com.nidalee.kotlin.ui.activity
+package com.nidalee.kotlin.ui.activity.android
 
 import android.content.Context
-import android.content.Intent
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseActivity
 import android.widget.LinearLayout

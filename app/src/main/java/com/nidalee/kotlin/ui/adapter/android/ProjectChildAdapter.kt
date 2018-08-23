@@ -1,4 +1,4 @@
-package com.nidalee.kotlin.ui.adapter
+package com.nidalee.kotlin.ui.adapter.android
 
 import android.widget.ImageView
 import android.widget.TextView

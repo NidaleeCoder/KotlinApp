@@ -11,6 +11,7 @@ import com.kotlin.nidalee.repository_lib.net.bean.android.NavigationBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.ProjectTreeBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.ProjectTreeListBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.WebSitesBean
+import com.kotlin.nidalee.repository_lib.net.bean.eye.CategoryBean
 import com.nidalee.kotlin.repository.BaseRepository
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,6 +26,7 @@ import io.reactivex.schedulers.Schedulers
 object HomeRepository : BaseRepository() {
 
   private var homeApi: WanAndroidApi = getApi(WanAndroidApi::class.java)
+
 
   /**
    * 获取首页Banner

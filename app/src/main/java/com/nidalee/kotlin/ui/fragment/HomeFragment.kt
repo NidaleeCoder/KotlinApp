@@ -8,11 +8,11 @@ import com.example.nidalee.usekotlin.net.bean.HomeArticleBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.HomeBannerBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseFragment
-import com.nidalee.kotlin.ui.activity.KnowledgeActivity
-import com.nidalee.kotlin.ui.activity.NavigationActivity
-import com.nidalee.kotlin.ui.activity.ProjectActivity
-import com.nidalee.kotlin.ui.activity.WebActivity
-import com.nidalee.kotlin.ui.adapter.HomeAdapter
+import com.nidalee.kotlin.ui.activity.android.KnowledgeActivity
+import com.nidalee.kotlin.ui.activity.android.NavigationActivity
+import com.nidalee.kotlin.ui.activity.android.ProjectActivity
+import com.nidalee.kotlin.ui.activity.android.WebActivity
+import com.nidalee.kotlin.ui.adapter.android.HomeAdapter
 import com.nidalee.kotlin.utils.BannerLoader
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import com.orhanobut.logger.Logger

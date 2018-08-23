@@ -11,6 +11,7 @@ import com.kotlin.nidalee.repository_lib.net.bean.android.NavigationBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.ProjectTreeBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.ProjectTreeListBean
 import com.kotlin.nidalee.repository_lib.net.bean.android.WebSitesBean
+import com.kotlin.nidalee.repository_lib.net.bean.eye.CategoryBean
 import com.nidalee.kotlin.base.BaseViewModel
 import com.nidalee.kotlin.model.HomeModel
 import com.nidalee.kotlin.net.UIDataBean

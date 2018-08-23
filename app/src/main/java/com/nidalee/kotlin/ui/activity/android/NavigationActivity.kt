@@ -1,16 +1,13 @@
-package com.nidalee.kotlin.ui.activity
+package com.nidalee.kotlin.ui.activity.android
 
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView.HORIZONTAL
-import android.support.v7.widget.RecyclerView.LayoutManager
-import android.support.v7.widget.RecyclerView.VERTICAL
 import android.support.v7.widget.StaggeredGridLayoutManager
 import com.example.nidalee.usekotlin.net.UIBaseLiveData
 import com.kotlin.nidalee.repository_lib.net.bean.android.NavigationBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseActivity
-import com.nidalee.kotlin.ui.adapter.NavigationLeftAdapter
-import com.nidalee.kotlin.ui.adapter.NavigationRightAdapter
+import com.nidalee.kotlin.ui.adapter.android.NavigationLeftAdapter
+import com.nidalee.kotlin.ui.adapter.android.NavigationRightAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_navigation.navigation_recycler_left
 import kotlinx.android.synthetic.main.activity_navigation.navigation_recycler_right
@@ -29,11 +26,11 @@ class NavigationActivity:BaseActivity(){
     HomeViewModel()
   }
 
-  private val leftAdapter:NavigationLeftAdapter by lazy {
+  private val leftAdapter: NavigationLeftAdapter by lazy {
     NavigationLeftAdapter(null)
   }
 
-  private val rightAdapter:NavigationRightAdapter by lazy {
+  private val rightAdapter: NavigationRightAdapter by lazy {
     NavigationRightAdapter(null)
   }
 
@@ -59,7 +56,11 @@ class NavigationActivity:BaseActivity(){
     }
 
     rightAdapter.setOnItemClickListener { _, _, position ->
-      WebActivity.startActivity(baseContext,rightAdapter.data[position].link,rightAdapter.data[position].title)
+      WebActivity.startActivity(
+        baseContext,
+        rightAdapter.data[position].link,
+        rightAdapter.data[position].title
+      )
     }
   }
 

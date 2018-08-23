@@ -40,13 +40,9 @@ class HttpModule constructor(httpUrl: HttpUrl) {
   @Provides
   fun provideOkHttpClientBuilder(): OkHttpClient.Builder {
     val bulider = OkHttpClient.Builder()
-
     val httpLoggingInterceptor = HttpLoggingInterceptor()
     httpLoggingInterceptor.level = BODY
-
     bulider.addInterceptor(httpLoggingInterceptor)
-
-
     //设置缓存
     val cacheFile = BaseApplication.appComponent?.let {
       File(it.getApplication().cacheDir,"cache")

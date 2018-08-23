@@ -1,4 +1,4 @@
-package com.nidalee.kotlin.ui.activity
+package com.nidalee.kotlin.ui.activity.android
 
 import android.content.Context
 import android.content.Intent
@@ -7,7 +7,7 @@ import com.example.nidalee.usekotlin.net.UIBaseLiveData
 import com.kotlin.nidalee.repository_lib.net.bean.android.KnowledgeArticleBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseActivity
-import com.nidalee.kotlin.ui.adapter.KnowledgeListAdapter
+import com.nidalee.kotlin.ui.adapter.android.KnowledgeListAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_knowledge_list.knowledge_list_recycler_view
 import kotlinx.android.synthetic.main.activity_knowledge_list.knowledge_swipe_layout

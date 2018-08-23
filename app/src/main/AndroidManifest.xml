@@ -21,7 +21,7 @@
       android:supportsRtl="true"
       android:theme="@style/AppTheme"
       android:name=".MyApplication">
-    <activity android:name=".ui.activity.MainActivity">
+    <activity android:name=".ui.activity.android.MainActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
@@ -29,15 +29,19 @@
       </intent-filter>
     </activity>
 
-    <activity android:name=".ui.activity.KnowledgeListActivity"/>
+    <activity android:name=".ui.activity.android.KnowledgeListActivity"/>
 
-    <activity android:name=".ui.activity.WebActivity"/>
+    <activity android:name=".ui.activity.android.WebActivity"/>
 
-    <activity android:name=".ui.activity.KnowledgeActivity"/>
+    <activity android:name=".ui.activity.android.KnowledgeActivity"/>
 
-    <activity android:name=".ui.activity.ProjectActivity"/>
+    <activity android:name=".ui.activity.android.ProjectActivity"/>
 
-    <activity android:name=".ui.activity.NavigationActivity"/>
+    <activity android:name=".ui.activity.android.NavigationActivity"/>
+
+    <activity android:name=".ui.activity.eye.CateGoryActivity"/>
+
+    <activity android:name=".ui.activity.eye.CateGoryDetailsActivity"/>
   </application>
 
 </manifest>

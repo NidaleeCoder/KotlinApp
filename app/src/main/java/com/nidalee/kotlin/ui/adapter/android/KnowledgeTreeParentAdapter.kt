@@ -1,4 +1,4 @@
-package com.nidalee.kotlin.ui.adapter
+package com.nidalee.kotlin.ui.adapter.android
 
 import android.graphics.Color
 import android.widget.TextView

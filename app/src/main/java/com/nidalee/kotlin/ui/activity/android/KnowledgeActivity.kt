@@ -1,12 +1,12 @@
-package com.nidalee.kotlin.ui.activity
+package com.nidalee.kotlin.ui.activity.android
 
 import android.support.v7.widget.LinearLayoutManager
 import com.example.nidalee.usekotlin.net.UIBaseLiveData
 import com.kotlin.nidalee.repository_lib.net.bean.android.KnowledgeTreeBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseActivity
-import com.nidalee.kotlin.ui.adapter.KnowledgeTreeChildAndapter
-import com.nidalee.kotlin.ui.adapter.KnowledgeTreeParentAdapter
+import com.nidalee.kotlin.ui.adapter.android.KnowledgeTreeChildAndapter
+import com.nidalee.kotlin.ui.adapter.android.KnowledgeTreeParentAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_knowledge.search_recycler_view_child
 import kotlinx.android.synthetic.main.activity_knowledge.search_recycler_view_parent

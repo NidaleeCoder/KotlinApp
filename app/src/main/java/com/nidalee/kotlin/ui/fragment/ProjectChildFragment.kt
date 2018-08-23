@@ -6,7 +6,8 @@ import com.example.nidalee.usekotlin.net.UIBaseLiveData
 import com.kotlin.nidalee.repository_lib.net.bean.android.ProjectTreeListBean
 import com.nidalee.kotlin.R
 import com.nidalee.kotlin.base.BaseFragment
-import com.nidalee.kotlin.ui.adapter.ProjectChildAdapter
+import com.nidalee.kotlin.ui.activity.android.WebActivity
+import com.nidalee.kotlin.ui.adapter.android.ProjectChildAdapter
 import com.nidalee.kotlin.viewmodel.HomeViewModel
 import kotlinx.android.synthetic.main.activity_project_list.project_recycler
 import kotlinx.android.synthetic.main.activity_project_list.project_swipe_layout
@@ -56,6 +57,9 @@ class ProjectChildFragment : BaseFragment() {
       getData()
     }
     childAdapter.setOnLoadMoreListener(loadMore, project_recycler)
+    childAdapter.setOnItemClickListener { _, _, position ->
+      WebActivity.startActivity(context!!,childAdapter.data[position].link,childAdapter.data[position].title)
+    }
   }
 
   override fun initData() {
