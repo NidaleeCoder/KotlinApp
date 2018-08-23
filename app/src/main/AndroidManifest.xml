@@ -42,6 +42,8 @@
     <activity android:name=".ui.activity.eye.CateGoryActivity"/>
 
     <activity android:name=".ui.activity.eye.CateGoryDetailsActivity"/>
+
+    <activity android:name=".ui.activity.eye.PlayActivity"/>
   </application>
 
 </manifest>

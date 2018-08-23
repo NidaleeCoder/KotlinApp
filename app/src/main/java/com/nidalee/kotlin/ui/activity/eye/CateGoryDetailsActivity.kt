@@ -19,11 +19,11 @@ import org.jetbrains.anko.startActivity
  * @author 奈德丽
  * @date 2018/8/23 17:04
  */
-class CateGoryDetailsActivity:BaseActivity(){
+class CateGoryDetailsActivity : BaseActivity() {
 
   override fun initLayout(): Int = R.layout.activity_eye_category
 
-  private val categoryDetailAdapter:EyeCategoryDetailAdapter by lazy {
+  private val categoryDetailAdapter: EyeCategoryDetailAdapter by lazy {
     EyeCategoryDetailAdapter(null)
   }
 
@@ -31,12 +31,12 @@ class CateGoryDetailsActivity:BaseActivity(){
   private var id = 0L
 
   companion object {
-    fun startActivity(context: Context,id:Long,title:String){
-      context.startActivity<CateGoryDetailsActivity>("id" to id,"title" to title)
+    fun startActivity(context: Context, id: Long, title: String) {
+      context.startActivity<CateGoryDetailsActivity>("id" to id, "title" to title)
     }
   }
 
-  private val eyeViewModel:EyeViewModel by lazy {
+  private val eyeViewModel: EyeViewModel by lazy {
     EyeViewModel()
   }
 
@@ -44,31 +44,38 @@ class CateGoryDetailsActivity:BaseActivity(){
     super.initView()
     common_title.text = intent.getStringExtra("title")
     common_back.setOnClickListener { finish() }
-    id = intent.getLongExtra("id",0L)
+    id = intent.getLongExtra("id", 0L)
     eye_category_recycler.run {
       layoutManager = LinearLayoutManager(baseContext)
       adapter = categoryDetailAdapter
     }
     categoryDetailAdapter.setOnLoadMoreListener({
       getListDate()
-    },eye_category_recycler)
+    }, eye_category_recycler)
+
+    categoryDetailAdapter.setOnItemClickListener { _, _, position ->
+      PlayActivity.startActivity(
+        baseContext,
+        categoryDetailAdapter.data[position].data.descriptionPgc,
+        categoryDetailAdapter.data[position].data.playUrl
+      )
+    }
   }
 
   override fun initData() {
     super.initData()
 
-    eyeViewModel.categoryDetailsLiveData.observe(this,object :UIBaseLiveData<Issue>(){
+    eyeViewModel.categoryDetailsLiveData.observe(this, object : UIBaseLiveData<Issue>() {
       override fun onSuccess(t: Issue?) {
         categoryDetailAdapter.loadMoreComplete()
         t?.run {
-          if (start == 0L){
+          if (start == 0L) {
             categoryDetailAdapter.setNewData(t.itemList)
-          }else{
+          } else {
             categoryDetailAdapter.addData(t.itemList)
           }
           start += 10
         }
-
       }
 
       override fun onError(errorMsg: String?) {
@@ -80,7 +87,7 @@ class CateGoryDetailsActivity:BaseActivity(){
     getListDate()
   }
 
-  private fun getListDate(){
-    eyeViewModel.getCategoryDetailList(start,id)
+  private fun getListDate() {
+    eyeViewModel.getCategoryDetailList(start, id)
   }
 }
